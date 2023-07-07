@@ -1,0 +1,38 @@
+介绍：
+    本项目为查找指定目录下的所有txt/word/execl文件是否包含指定字符。
+使用操作：
+    1，下载aaa-1.0-SNAPSHOT.jar，导入依赖。
+       <dependency>
+           <groupId>org.example</groupId>
+           <artifactId>aaa</artifactId>
+           <version>1.0-SNAPSHOT</version>
+       </dependency>
+    2，application.properties文件中配置指定目录与指定字符。
+       例：
+          -filePath=指定目录
+          -keyword=指定字符
+    3，加入到spring容器中。
+       例：
+          @Configuration
+          public class SpringConfig {
+              @Bean
+              public GetFilePath getFilePath()
+              {
+                  return new GetFilePath();
+              }
+          }
+    4，@Autowired注入GetFilePath，使用。
+功能说明。
+GetFilePath.java.
+    1，从application.properties中获取指定目录与指定字符，
+    2，遍历目录中的文件，判断是否是txt,word,excel文件，利用反射机制加载对应文件的解析类。
+DocxAnalysis.java.
+    加载word文件，查找指定字符，记录字符所在位置
+XlsxAnalysis.java.
+    加载excel文件，查找指定字符，记录字符所在位置
+TxtAnalysis.java.
+    加载txt文件，查找指定字符，记录字符所在位置
+Search.java.
+    查找指定字符方法。
+后续改进：
+    使用elasticsearch.
